@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Generate a Change-Id for commits created by git revert.
+case "$(sed -n '1p' "$1")" in
+  Revert\ \"*)
+    commit_msg_hook="$(dirname "$0")/commit-msg"
+
+    if test -x "$commit_msg_hook"; then
+      "$commit_msg_hook" "$1"
+    fi
+    ;;
+esac
