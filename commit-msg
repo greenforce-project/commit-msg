@@ -38,10 +38,7 @@ case "$(git config --get gerrit.createChangeId)" in
   always)
     ;;
   *)
-    # Do not create a change id for squash/fixup commits.
-    if head -n1 "$1" | LC_ALL=C grep -q '^[a-z][a-z]*! '; then
-      exit 0
-    fi
+    # Always create a Change-Id for squash/fixup commits.
     ;;
 esac
 
